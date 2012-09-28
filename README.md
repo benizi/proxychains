@@ -1,6 +1,6 @@
 # Not the official version
 
-[Real README is elsewhere...](https://github.com/haad/proxychains).
+[Real README is elsewhere...](https://github.com/haad/proxychains#readme).
 
 
 # Changes in my fork
