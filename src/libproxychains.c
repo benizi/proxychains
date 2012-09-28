@@ -54,7 +54,7 @@ gethostbyaddr_t true_gethostbyaddr;
 int tcp_read_time_out;
 int tcp_connect_time_out;
 int proxychains_got_chain_data = 0;
-int proxychains_quiet_mode = 0;
+int proxychains_quiet_mode = 1;
 int proxychains_resolver = 0;
 
 unsigned int proxychains_proxy_count = 0;

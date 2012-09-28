@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
 	char buf[PATH_MAX];
 	char pbuf[PATH_MAX];
 	int start_argv = 1;
-	int quiet = 0;
+	int quiet = 1;
 	size_t i;
 
 	const char *prefix = NULL;
