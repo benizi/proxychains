@@ -30,11 +30,11 @@ INSTALL_FLAGS = -D -m
 
 -include config.mak
 
-LDSO_PATHNAME = libproxychains4.$(LDSO_SUFFIX)
+LDSO_PATHNAME = libproxychains.$(LDSO_SUFFIX)
 
 SHARED_LIBS = $(LDSO_PATHNAME)
 ALL_LIBS = $(SHARED_LIBS)
-PXCHAINS = proxychains4
+PXCHAINS = proxychains
 ALL_TOOLS = $(PXCHAINS)
 
 CCFLAGS+=$(USER_CFLAGS) $(OS_CFLAGS)
