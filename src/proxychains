@@ -1,5 +1,8 @@
 #!/bin/sh
-echo "ProxyChains-4.0 (https://github.com/haad/proxychains)"
+if [ -z "$PROXYCHAINS_STUPIDLY_VERBOSE" ]
+then
+	echo "ProxyChains-4.0 (https://github.com/haad/proxychains)"
+fi
 
 usage() {
 
