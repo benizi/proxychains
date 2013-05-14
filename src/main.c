@@ -92,13 +92,9 @@ int main(int argc, char *argv[]) {
 	if(start_argv >= argc)
 		return usage(argv);
 
-	/* check if path of config file has not been passed via command line */
-	path = get_config_path(path, pbuf, sizeof(pbuf));
-	if(!quiet)
-		fprintf(stderr, LOG_PREFIX "config file found: %s\n", path);
-
 	/* Set PROXYCHAINS_CONF_FILE to get proxychains lib to use new config file. */
-	setenv(PROXYCHAINS_CONF_FILE_ENV_VAR, path, 1);
+	if(path)
+		setenv(PROXYCHAINS_CONF_FILE_ENV_VAR, path, 1);
 
 	if(quiet)
 		setenv(PROXYCHAINS_QUIET_MODE_ENV_VAR, "1", 1);
