@@ -64,7 +64,6 @@ static void set_own_dir(const char *argv0) {
 int main(int argc, char *argv[]) {
 	char *path = NULL;
 	char buf[PATH_MAX];
-	char pbuf[PATH_MAX];
 	int start_argv = 1;
 	int quiet = 1;
 	size_t i;
