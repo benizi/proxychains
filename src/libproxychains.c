@@ -75,6 +75,7 @@ static int init_l = 0;
 static void load_default_settings(chain_type *ct);
 static inline void get_chain_data(proxy_data * pd, unsigned int *proxy_count, chain_type * ct);
 static void simple_socks5_env(proxy_data * pd, unsigned int *proxy_count, chain_type * ct);
+static void parse_localnet_env(proxy_data * pd);
 
 static void* load_sym(char* symname, void* proxyfunc) {
 
@@ -330,8 +331,39 @@ static void simple_socks5_env(proxy_data *pd, unsigned int *proxy_count, chain_t
 	if(getenv(PROXYCHAINS_DNS_ENV_VAR))
 		proxychains_resolver = 1;
 
+	parse_localnet_env(pd);
+
 	*proxy_count = 1;
 	proxychains_got_chain_data = 1;
+}
+
+void parse_localnet_env(proxy_data *pd) {
+	char addr_port[32], addr[32], port[32], netmask[32];
+	char *localnet = getenv(PROXYCHAINS_LOCALNET_VAR);
+	port[0] = '\0';
+
+	if(!localnet)
+		return;
+
+	if(sscanf(localnet, "%21[^/]/%15s", addr_port, netmask) < 2) {
+		fprintf(stderr, "%s format error\n", PROXYCHAINS_LOCALNET_VAR);
+		return;
+	}
+
+	(void)sscanf(addr_port, "%15[^:]:%5s", addr, port);
+
+	if(inet_pton(AF_INET, addr, &localnet_addr[0].in_addr) <= 0) {
+		fprintf(stderr, "%s address error\n", PROXYCHAINS_LOCALNET_VAR);
+		return;
+	}
+
+	if(inet_pton(AF_INET, netmask, &localnet_addr[0].netmask) <= 0) {
+		fprintf(stderr, "%s netmask error\n", PROXYCHAINS_LOCALNET_VAR);
+		return;
+	}
+
+	localnet_addr[0].port = port[0] ? (unsigned short) atoi(port) : 0;
+	num_localnet_addr = 1;
 }
 
 /*******  HOOK FUNCTIONS  *******/
